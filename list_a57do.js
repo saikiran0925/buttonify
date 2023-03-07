@@ -74,3 +74,18 @@ function generateJSON() {
     });
   }
 }
+
+function validateListButton() {
+  const buttonInput = document.getElementById("button");
+  const errorMessage = document.getElementById("button_error");
+  if (buttonInput === "") {
+    errorMessage.innerHTML = "Button cannot be empty";
+    return false;
+  } else if (buttonInput.value.length > 20) {
+    errorMessage.innerHTML = "Button input should not exceed 20 characters.";
+    return false;
+  } else {
+    errorMessage.innerText = "";
+  }
+  return true;
+}

@@ -52,3 +52,19 @@ function generateJSON() {
     });
   }
 }
+
+
+function validateText() {
+  const textInput = document.getElementById("text");
+  const errorMessage = document.getElementById("text_error");
+  if (textInput.value === "") {
+    errorMessage.innerHTML = "Text cannot be empty";
+    return false;
+  } else if (textInput.value.length > 1024) {
+    errorMessage.innerText = "Text should be no more than 24 characters";
+    return false;
+  } else {
+    errorMessage.innerText = "";
+  }
+  return true;
+}

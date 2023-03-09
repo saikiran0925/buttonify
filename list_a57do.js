@@ -36,6 +36,11 @@ function generateJSON() {
     };
 
     var jsonString = JSON.stringify(jsonObject);
+    
+    var previousModal = document.getElementById("jsonModal");
+    if (previousModal) {
+      previousModal.remove();
+    }
 
     var modal =
       '<div class="modal fade" id="jsonModal" tabindex="-1" aria-labelledby="jsonModalLabel" aria-hidden="true">';

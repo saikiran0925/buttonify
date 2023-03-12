@@ -45,12 +45,19 @@
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" />
       <div class="button-container text-center">
-        <button type="button" class="btn btn-success" onclick="if (validateListButton()) generateJSON()">
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="if (validateListButton()) generateJSON()"
+        >
           Generate JSON
         </button>
       </div>
     </form>
-
+    <div id="widget">
+      <img src="notes.png" alt="Widget Logo" />
+    </div>
+    <script src="widget.js"></script>
     <script src="list_a57do.js"></script>
   </body>
 </html>

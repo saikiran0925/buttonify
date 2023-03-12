@@ -38,12 +38,19 @@
       <input type="text" id="text" name="text" oninput="validateText()" />
       <div id="text_error" class="text-danger"></div>
       <div class="button-container text-center">
-        <button type="button" class="btn btn-success" onclick="if (validateText()) generateJSON()">
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="if (validateText()) generateJSON()"
+        >
           Generate JSON
         </button>
       </div>
     </form>
-
+    <div id="widget">
+      <img src="notes.png" alt="Widget Logo" />
+    </div>
+    <script src="widget.js"></script>
     <script src="buttons_a57dbo.js"></script>
   </body>
 </html>

@@ -12,6 +12,8 @@ widget.addEventListener('click', () => {
       widgetBox.style.width = '200px';
       widgetBox.style.height = '200px';
       textField.style.display = 'none';
+      formatButton.style.display = 'none';
+      message.style.display = 'none';
       widgetBox.style.opacity = '1';
     }, 300);
   } else {
@@ -21,6 +23,8 @@ widget.addEventListener('click', () => {
       widgetBox.style.width = '400px';
       widgetBox.style.height = '400px';
       textField.style.display = 'block';
+      formatButton.style.display = 'block';
+      message.style.display = 'block';
       widgetBox.style.opacity = '1';
     }, 100);
   }
@@ -30,7 +34,7 @@ widget.addEventListener('click', () => {
 const textField = document.createElement('textarea');
 textField.placeholder = 'Paste your stuff here...';
 textField.style.width = '90%';
-textField.style.height = '90%';
+textField.style.height = '70%';
 textField.style.marginTop = '20px';
 textField.style.marginLeft = '20px';
 textField.style.padding = '10px';
@@ -41,6 +45,39 @@ textField.style.fontSize = '16px';
 textField.style.fontFamily = 'Arial, sans-serif';
 textField.style.display = 'none';
 widgetBox.appendChild(textField);
+
+// Add a "Format" button to the widget box
+const formatButton = document.createElement('button');
+formatButton.innerHTML = 'Format';
+formatButton.style.margin = '10px 20px';
+formatButton.style.padding = '10px 20px';
+formatButton.style.marginLeft = '160px';
+formatButton.style.borderRadius = '5px';
+formatButton.style.fontSize = '16px';
+formatButton.style.fontFamily = 'Arial, sans-serif';
+formatButton.style.display = 'none';
+widgetBox.appendChild(formatButton);
+
+// Add a message to show the validity of the JSON
+const message = document.createElement('div');
+message.style.marginLeft = '20px';
+message.style.marginLeft = '160px';
+message.style.fontFamily = 'Arial, sans-serif';
+message.style.display = 'none';
+widgetBox.appendChild(message);
+
+// Add event listener to the "Format" button
+formatButton.addEventListener('click', () => {
+  try {
+    const json = JSON.parse(textField.value);
+    textField.value = JSON.stringify(json, null, 2);
+    message.innerHTML = 'JSON is valid!';
+    message.style.color = 'green';
+  } catch (e) {
+    message.innerHTML = 'Invalid JSON!';
+    message.style.color = 'red';
+  }
+});
 
 // Add CSS to style the widget box
 widgetBox.style.position = 'fixed';

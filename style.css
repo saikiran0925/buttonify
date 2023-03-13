@@ -90,3 +90,22 @@ form {
     height: 50px;
     margin: 0;
   }
+
+  #json-widget {
+    position: fixed;
+    bottom: 20px;
+    left: 170px;
+    width: 50px;
+    height: 100px;
+    z-index: 9999;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #json-widget img {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+  }

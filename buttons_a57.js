@@ -152,12 +152,11 @@ function generateJSON() {
 }
 
 
-function generateButtonsFromJSON() {
-  var jsonString = document.getElementById("jsonify").value;
+function generateButtonsFromJSON(jsonString, action, buttons, replyProp, idProp, titleProp) {
   try {
     var jsonObject = JSON.parse(jsonString);
     var text = jsonObject.body.text;
-    var buttons = jsonObject.action.buttons;
+    var buttons = jsonObject[action][buttons];
 
     var textDiv = document.getElementById("text");
     textDiv.value = text;
@@ -166,8 +165,8 @@ function generateButtonsFromJSON() {
     buttonsDiv.innerHTML = "";
 
     for (var i = 0; i < buttons.length; i++) {
-      var idValue = buttons[i].reply.id;
-      var titleValue = buttons[i].reply.title;
+      var idValue = buttons[i][replyProp][idProp];
+      var titleValue = buttons[i][replyProp][titleProp];
 
       var newDiv = document.createElement("div");
       newDiv.id = "button_" + (i + 1);

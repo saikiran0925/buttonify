@@ -173,3 +173,101 @@ function generateJSON() {
     jsonModal.hide();
   });
 }
+
+function addButtonFromJson(buttonJson) {
+  var buttonData = JSON.parse(buttonJson);
+
+  var buttonsDiv = document.getElementById("buttons");
+  while (buttonsDiv.firstChild) {
+    buttonsDiv.removeChild(buttonsDiv.firstChild);
+  }
+
+  if (
+    buttonData.action &&
+    buttonData.action.sections &&
+    buttonData.action.sections[0].rows
+  ) {
+    var rows = buttonData.action.sections[0].rows;
+    var numButtons = rows.length;
+
+    if (numButtons > 9) {
+      alert("We can't create more than 10 list options");
+      return;
+    }
+
+    var buttonsDiv = document.getElementById("buttons");
+
+    var newDiv = document.createElement("div");
+    newDiv.id = "button_" + numButtons;
+    newDiv.className = "text-container";
+
+    for (var i = 0; i < numButtons; i++) {
+      var id = rows[i].id;
+      var title = rows[i].title;
+      var description = rows[i].description;
+
+      var idLabel = document.createElement("label");
+      idLabel.htmlFor = "id_" + i;
+      idLabel.innerHTML = "ID:";
+
+      var idInput = document.createElement("input");
+      idInput.type = "text";
+      idInput.id = "id_" + i;
+      idInput.name = "id_" + i;
+      idInput.value = id;
+
+      var titleLabel = document.createElement("label");
+      titleLabel.htmlFor = "text_" + i;
+      titleLabel.innerHTML = "Title:";
+
+      var titleInput = document.createElement("input");
+      titleInput.type = "text";
+      titleInput.id = "title_" + i;
+      titleInput.name = "title_" + i;
+      titleInput.value = title;
+
+      var validateTitle = document.createElement("div");
+      validateTitle.id = "title_error_" + i;
+      validateTitle.className = "text-danger";
+
+      var descLabel = document.createElement("label");
+      descLabel.htmlFor = "description_" + i;
+      descLabel.innerHTML = "Description:";
+
+      if (description) {
+        var descInput = document.createElement("input");
+        descInput.type = "text";
+        descInput.id = "description_" + i;
+        descInput.name = "description_" + i;
+        descInput.value = description;
+
+        var validateDesc = document.createElement("div");
+        validateDesc.id = "desc_error_" + i;
+        validateDesc.className = "text-danger";
+
+        newDiv.appendChild(descLabel);
+        newDiv.appendChild(descInput);
+        newDiv.appendChild(validateDesc);
+      }
+
+      var buttonContainerDiv = document.createElement("div");
+      buttonContainerDiv.className = "button-container text-center";
+
+      var removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "btn btn-danger remove-button";
+      removeButton.setAttribute("onclick", "removeButtonFunction(" + i + ")");
+      removeButton.innerHTML = "Remove";
+
+      newDiv.appendChild(idLabel);
+      newDiv.appendChild(idInput);
+      newDiv.appendChild(titleLabel);
+      newDiv.appendChild(titleInput);
+      newDiv.appendChild(validateTitle);
+      buttonContainerDiv.appendChild(removeButton);
+      newDiv.appendChild(buttonContainerDiv);
+    }
+
+    buttonsDiv.appendChild(newDiv);
+  }
+}

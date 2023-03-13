@@ -34,10 +34,6 @@
     </nav>
     <form>
       <div class="text-container">
-        <label for="jsonify">JSON:</label>
-        <input type="text" id="jsonify" name="jsonif"  />
-      </div>
-      <div class="text-container">
         <label for="text">Text:</label>
         <input type="text" id="text" name="text" oninput="validateText()" />
         <div id="text_error" class="text-danger"></div>
@@ -81,18 +77,9 @@
         <button
           type="button"
           class="btn btn-success"
-          onclick="if (validateInput()) generateJSON()"
+          onclick="generateJSON()"
         >
           Generate JSON
-        </button>
-      </div>
-      <div class="button-container text-center">
-        <button
-          type="button"
-          class="btn btn-success"
-          onclick="generateButtonsFromJSON()"
-        >
-          JSONify
         </button>
       </div>
     </form>
@@ -147,6 +134,10 @@
     <div id="widget">
       <img src="notes.png" alt="Widget Logo" />
     </div>
+    <div id="json-widget">
+      <img src="notes.png" alt="Widget Logo" />
+    </div>
+    <script src="json_widget.js"></script>
     <script src="widget.js"></script>
     <script src="buttons_a57.js"></script>
     <script src="validate_buttons.js"></script>

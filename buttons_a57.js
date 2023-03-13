@@ -113,7 +113,7 @@ function generateJSON() {
   if (previousModal) {
     previousModal.remove();
   }
-  
+
   var modal =
     '<div class="modal fade" id="jsonModal" tabindex="-1" aria-labelledby="jsonModalLabel" aria-hidden="true">';
   modal += '<div class="modal-dialog modal-dialog-centered">';
@@ -149,4 +149,72 @@ function generateJSON() {
     console.log("Copied to clipboard");
     jsonModal.hide();
   });
+}
+
+
+function generateButtonsFromJSON() {
+  var jsonString = document.getElementById("jsonify").value;
+  try {
+    var jsonObject = JSON.parse(jsonString);
+    var text = jsonObject.body.text;
+    var buttons = jsonObject.action.buttons;
+
+    var textDiv = document.getElementById("text");
+    textDiv.value = text;
+
+    var buttonsDiv = document.getElementById("buttons");
+    buttonsDiv.innerHTML = "";
+
+    for (var i = 0; i < buttons.length; i++) {
+      var idValue = buttons[i].reply.id;
+      var titleValue = buttons[i].reply.title;
+
+      var newDiv = document.createElement("div");
+      newDiv.id = "button_" + (i + 1);
+      newDiv.className = "text-container";
+
+      var idLabel = document.createElement("label");
+      idLabel.htmlFor = "id_" + (i + 1);
+      idLabel.innerHTML = "ID:";
+
+      var idInput = document.createElement("input");
+      idInput.type = "text";
+      idInput.id = "id_" + (i + 1);
+      idInput.name = "id_" + (i + 1);
+      idInput.value = idValue;
+
+      var titleLabel = document.createElement("label");
+      titleLabel.htmlFor = "text_" + (i + 1);
+      titleLabel.innerHTML = "Title:";
+
+      var titleInput = document.createElement("input");
+      titleInput.type = "text";
+      titleInput.id = "title_" + (i + 1);
+      titleInput.name = "title_" + (i + 1);
+      titleInput.value = titleValue;
+
+      var buttonContainerDiv = document.createElement("div");
+      buttonContainerDiv.className = "button-container text-center";
+
+      var removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "btn btn-danger remove-button";
+      removeButton.setAttribute(
+        "onclick",
+        "removeButtonFunction(" + (i + 1) + ")"
+      );
+      removeButton.innerHTML = "Remove";
+
+      newDiv.appendChild(idLabel);
+      newDiv.appendChild(idInput);
+      newDiv.appendChild(titleLabel);
+      newDiv.appendChild(titleInput);
+      buttonContainerDiv.appendChild(removeButton);
+      newDiv.appendChild(buttonContainerDiv);
+
+      buttonsDiv.appendChild(newDiv);
+    }
+  } catch (e) {
+    console.error("Error parsing JSON: ", e);
+  }
 }

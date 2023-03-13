@@ -34,6 +34,10 @@
     </nav>
     <form>
       <div class="text-container">
+        <label for="jsonify">JSON:</label>
+        <input type="text" id="jsonify" name="jsonif"  />
+      </div>
+      <div class="text-container">
         <label for="text">Text:</label>
         <input type="text" id="text" name="text" oninput="validateText()" />
         <div id="text_error" class="text-danger"></div>
@@ -80,6 +84,15 @@
           onclick="if (validateInput()) generateJSON()"
         >
           Generate JSON
+        </button>
+      </div>
+      <div class="button-container text-center">
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="generateButtonsFromJSON()"
+        >
+          JSONify
         </button>
       </div>
     </form>
